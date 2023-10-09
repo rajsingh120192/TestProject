@@ -52,4 +52,11 @@ public class GlobalExceptionalHandler {
 		ApiResponse apiResponse = new ApiResponse(message, false);
 		return new ResponseEntity<ApiResponse>(apiResponse, HttpStatus.METHOD_NOT_ALLOWED);	
 	}
+	
+	@ExceptionHandler(ApiException.class)
+	public ResponseEntity<ApiResponse> handleApiException(ApiException ex) {
+		String message = ex.getMessage();
+		ApiResponse apiResponse = new ApiResponse(message, true);
+		return new ResponseEntity<ApiResponse>(apiResponse, HttpStatus.BAD_REQUEST);
+	}
 }
